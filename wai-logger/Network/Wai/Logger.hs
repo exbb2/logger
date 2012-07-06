@@ -90,7 +90,6 @@ stdoutApacheLoggerInit ipsrc = stdoutLogger ipsrc <$> dateInit
 
 stdoutLogger :: IPAddrSource -> DateRef -> ApacheLogger
 stdoutLogger ipsrc dateref req status msiz =
-    getDate dateref >>= hPutLogStr stdout . logmsg
+    getDate dateref >>= hPutLogStr stdout . logmsg >> hFlush stdout
   where
     logmsg date = apacheFormat ipsrc date req status msiz
-
